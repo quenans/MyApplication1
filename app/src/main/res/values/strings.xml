@@ -4,4 +4,6 @@
     <string name="dummy_content">HELLO\nWORLD</string>
     <string name="difficulty">Difficulty</string>
     <string name="palate">Palate</string>
+    <string name="title_activity_next">NextActivity</string>
+    <string name="dummy_button">Dummy Button</string>
 </resources>
