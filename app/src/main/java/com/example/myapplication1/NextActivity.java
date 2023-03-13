@@ -1,10 +1,5 @@
 package com.example.myapplication1;
-
 import android.annotation.SuppressLint;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,13 +10,13 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.widget.Button;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication1.FullscreenActivity;
 import com.example.myapplication1.databinding.ActivityFullscreenBinding;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
-public class FullscreenActivity extends AppCompatActivity {
+public class NextActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -129,15 +124,6 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
-        Button ActButton = (Button) findViewById(R.id.dummy_button);
-
-        ActButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(FullscreenActivity.this, NextActivity.class));
-            }
-        });
-
     }
 
     @Override
@@ -197,3 +183,5 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 }
+
+
