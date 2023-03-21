@@ -186,7 +186,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
-    public void onButton(View v){
+    public void onButton(View v) {
         Intent intent = new Intent(this, NextActivity.class);
         startActivity(intent);
     }

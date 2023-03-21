@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue_600"
+    android:background="@color/material_dynamic_primary90"
     android:theme="@style/ThemeOverlay.MyApplication1.FullscreenContainer"
     tools:context=".FullscreenActivity">
 
@@ -19,16 +19,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="1dp"
+            app:boxBackgroundColor="#C8BDDC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/ingredients"
+                android:textAlignment="center"
+                android:textColor="#0FFFFFFF"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/fullscreen_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="65dp"
+            android:fontFamily="sans-serif-smallcaps"
             android:gravity="center"
             android:keepScreenOn="true"
             android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:textSize="50sp"
+            android:textColor="@color/purple_200"
+            android:textSize="55sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +57,11 @@
 
         <SeekBar
             android:id="@+id/seekBar2"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="336dp"
             android:layout_height="151dp"
+            android:indeterminate="false"
+            android:max="9"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -46,9 +70,13 @@
 
         <TextView
             android:id="@+id/Difficulty_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="67dp"
+            android:layout_height="40dp"
+            android:fontFamily="sans-serif-medium"
             android:text="@string/difficulty"
+            android:textAlignment="center"
+            android:textColor="#673AB7"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -123,10 +124,8 @@ public class NextActivity extends AppCompatActivity {
             }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        binding.dummyButton.setOnTouchListener(mDelayHideTouchListener);
+
+
     }
 
     @Override
@@ -184,5 +183,9 @@ public class NextActivity extends AppCompatActivity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+    public void onBack(View v){
+        Intent intent = new Intent(this, FullscreenActivity.class);
+        startActivity(intent);
     }
 }
