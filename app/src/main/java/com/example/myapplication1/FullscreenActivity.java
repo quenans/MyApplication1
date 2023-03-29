@@ -189,5 +189,6 @@ public class FullscreenActivity extends AppCompatActivity {
     public void onButton(View v) {
         Intent intent = new Intent(this, NextActivity.class);
         startActivity(intent);
+
     }
 }
