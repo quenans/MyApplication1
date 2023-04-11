@@ -1,15 +1,16 @@
 package com.example.myapplication1;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class DbHandler extends SQLiteOpenHelper{
 
@@ -23,10 +24,11 @@ public class DbHandler extends SQLiteOpenHelper{
     private static final Integer DB_version = 1;
 
     private static final String Table_Name = "drinks";
-
+    private Context dbContext;
     public DbHandler(@Nullable Context context) {
 
         super(context, DB_name, null, DB_version);
+        this.dbContext = context;
     }
 
 
@@ -40,26 +42,35 @@ public class DbHandler extends SQLiteOpenHelper{
 
         db.execSQL(query);
 
-
-
-
-
-
+        try {
+            insertData(db);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
+
+
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldv, int newv) {
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Table_Name);
+        onCreate(sqLiteDatabase);
     }
 
-    public void insertData(String path) throws IOException {
+    public void insertData(SQLiteDatabase db) throws IOException {
 
-        File csvFile = new File(path);
-        BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+        AssetManager assetManager = dbContext.getAssets();
+        InputStream inputStream = assetManager.open("Drinks.csv");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
         String line;
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.beginTransaction();
+
+
 
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
@@ -70,15 +81,12 @@ public class DbHandler extends SQLiteOpenHelper{
             values.put(col_strGlass, data[3]);
             values.put(col_fullString, data[4]);
             values.put(col_strInstructions, data[5]);
+
             db.insert(Table_Name, null, values);
         }
 
-        db.setTransactionSuccessful();
-        db.endTransaction();
-
-
-
-
+        reader.close();
+        inputStream.close();
 
         }
 }
