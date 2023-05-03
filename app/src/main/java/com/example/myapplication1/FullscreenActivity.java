@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,9 @@ import android.os.Looper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.myapplication1.databinding.ActivityFullscreenBinding;
 
@@ -40,6 +44,10 @@ public class FullscreenActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler(Looper.myLooper());
     private View mContentView;
+
+    private DbHandler handler;
+
+
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -128,6 +136,28 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         binding.dummyButton.setOnTouchListener(mDelayHideTouchListener);
+        Spinner spinner = findViewById(R.id.spinner);
+
+        // creation of adapter for dropdown spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.drink_list, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        handler = new DbHandler(this);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Handle selection for drink option chosen
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // maybe give a random drink option?
+            }
+        });
+
+
     }
 
     @Override
@@ -186,8 +216,17 @@ public class FullscreenActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
+    /***
+     * Button to move to nextActivity, and change UI
+     *
+     */
+
     public void onButton(View v){
         Intent intent = new Intent(this, NextActivity.class);
         startActivity(intent);
+        
+
+
     }
 }
