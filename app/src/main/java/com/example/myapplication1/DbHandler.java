@@ -1,7 +1,9 @@
 package com.example.myapplication1;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -12,9 +14,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
 public class DbHandler extends SQLiteOpenHelper{
 
-    private static final String DB_name = "seniorsemschema.db";
+    private static final String DB_name = "seniorsemschema";
     private static final String col_strDrink = "strDrink";
     private static final String col_strAlcoholic = "strAlcoholic";
     private static final String col_strCategories = "strCategories";
@@ -23,7 +26,7 @@ public class DbHandler extends SQLiteOpenHelper{
     private static final String col_strInstructions = "strInstructions";
     private static final Integer DB_version = 1;
 
-    private static final String Table_Name = "drinks";
+    private static final String Table_Name = "Drinks";
     private Context dbContext;
     public DbHandler(@Nullable Context context) {
 
@@ -34,7 +37,7 @@ public class DbHandler extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE drinks ( " +
+        String query = "CREATE TABLE Drinks ( " +
                          "strDrink text, strAlcoholic text, " +
                          "  `strCategories` text, " +
                          "`strGlass` text,  `fullString` text, `strInstructions` text" +
@@ -63,15 +66,11 @@ public class DbHandler extends SQLiteOpenHelper{
     }
 
     public void insertData(SQLiteDatabase db) throws IOException {
-
         AssetManager assetManager = dbContext.getAssets();
-        InputStream inputStream = assetManager.open("Drinks.csv");
+        InputStream inputStream = assetManager.open("DrinkInsertForSQLEasy.csv");
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
         String line;
-
-
-
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             ContentValues values = new ContentValues();
@@ -89,4 +88,6 @@ public class DbHandler extends SQLiteOpenHelper{
         inputStream.close();
 
         }
+
+
 }
